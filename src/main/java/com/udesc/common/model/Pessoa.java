@@ -1,11 +1,9 @@
 package com.udesc.common.model;
 
 public class Pessoa {
-
     private String cpf;
     private String nome;
     private String endereco;
-
 
     public Pessoa(String cpf, String nome, String endereco) {
         this.cpf = cpf;
@@ -37,15 +35,8 @@ public class Pessoa {
         this.endereco = endereco;
     }
 
-
     @Override
     public String toString() {
-        return "{" +
-            " cpf='" + getCpf() + "'" +
-            ", nome='" + getNome() + "'" +
-            ", endereco='" + getEndereco() + "'" +
-            "}";
+        return String.format("%s;%s;%s", getNome(), getCpf(), getEndereco());
     }
-
-
 }
