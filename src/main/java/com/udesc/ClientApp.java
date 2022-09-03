@@ -8,19 +8,24 @@ import java.util.Scanner;
 
 public class ClientApp {
     public static void main(String[] args) throws Exception {
-        Socket socket = new Socket("127.0.0.1", 80);
         Scanner scanner = new Scanner(System.in);
 
-        PrintWriter out = new PrintWriter(socket.getOutputStream());
-        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
         while (true) {
-            System.out.println("Please enter the message you want to send to the server side:");
-
             String str = scanner.nextLine();
+
+            Socket socket = new Socket("127.0.0.1", 80);
+            PrintWriter out = new PrintWriter(socket.getOutputStream());
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out.println(str);
             out.flush();
-            System.out.println(in.readLine());
+            
+            if (str.equals("exit"))
+                break;
+            
+            String result;
+            while ((result = in.readLine()) != null) {                
+                System.out.println(result);
+            }
         }
     }
 }
