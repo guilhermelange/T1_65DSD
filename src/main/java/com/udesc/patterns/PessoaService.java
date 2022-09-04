@@ -1,5 +1,6 @@
 package com.udesc.patterns;
 
+import com.udesc.common.model.Familia;
 import com.udesc.common.model.Pessoa;
 import com.udesc.db.Database;
 import java.util.Map;
@@ -39,6 +40,12 @@ public class PessoaService {
         Pessoa pessoa = pessoas.remove(cpf);
         if (pessoa == null) {
             return "Pessoa não encontrada";
+        }
+        
+        Map<String, Familia> familias = database.getFamilias();
+        for (Map.Entry<String, Familia> entry : familias.entrySet()) {
+            Familia familia = entry.getValue();
+            familia.getIntegrantes().remove(cpf);
         }
         
         return "Pessoa removida com sucesso";

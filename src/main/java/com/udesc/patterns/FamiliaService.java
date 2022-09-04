@@ -86,21 +86,15 @@ public class FamiliaService {
         
         Pessoa pessoa = database.getPessoas().get(cpf);
         if (pessoa == null) {
-            return "Pessoa não localizada";
+            return "Pessoa não localizada para o CPF: " + cpf;
         }
         
-        boolean localizado = false;
-        for (Pessoa integrante : familia.getIntegrantes()) {
-            if (integrante.getCpf().equals(cpf)) {
-                localizado = true;
-            }
-        }
-        
-        if (localizado) {
+        Pessoa pessoaLocalizada = familia.getIntegrantes().get(cpf);
+        if (pessoaLocalizada != null) {
             return "Pessoa já está na família";
         }
         
-        familia.getIntegrantes().add(pessoa);
+        familia.getIntegrantes().put(cpf, pessoa);
         return "Pessoa adicionada à família";
     }
     
@@ -112,18 +106,12 @@ public class FamiliaService {
             return "Família não localizada";
         }
         
-        Pessoa pessoa = null;
-        for (Pessoa integrante : familia.getIntegrantes()) {
-            if (integrante.getCpf().equals(cpf)) {
-                pessoa = integrante;
-            }
-        }
-        
+        Pessoa pessoa = familia.getIntegrantes().get(cpf);
         if (pessoa == null) {
-            return "Pessoa não localizada";
+            return "Pessoa não localizada na família";
         }
         
-        familia.getIntegrantes().remove(pessoa);
+        familia.getIntegrantes().remove(cpf);
         return "Pessoa removida da família";
     }
 }

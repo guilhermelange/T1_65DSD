@@ -1,18 +1,20 @@
 package com.udesc.common.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Familia {
     private String sobrenome;
     private String descendencia;
     private double renda;
-    private ArrayList<Pessoa> integrantes;
+    private Map<String, Pessoa> integrantes;
 
     public Familia(String sobrenome, String descendencia, double renda) {
         this.sobrenome = sobrenome;
         this.descendencia = descendencia;
         this.renda = renda;
-        this.integrantes = new ArrayList<>();
+        this.integrantes = new HashMap<>();
     }
 
     public String getSobrenome() {
@@ -39,7 +41,7 @@ public class Familia {
         this.renda = renda;
     }
 
-    public ArrayList<Pessoa> getIntegrantes() {
+    public Map<String, Pessoa> getIntegrantes() {
         return this.integrantes;
     }
 
@@ -52,8 +54,10 @@ public class Familia {
     public String toString() {
         String result = String.format("%s;%s;%.2f", getSobrenome(), getDescendencia(), getRenda());
         result += "\n" + String.valueOf(integrantes.size());
-        for (Pessoa integrante : integrantes) {
+        for (Map.Entry<String, Pessoa> entry : integrantes.entrySet()) {
+            Pessoa integrante = entry.getValue();
             result += "\n" + integrante.toString();
+            
         }
         return result;
     }
