@@ -1,4 +1,5 @@
 com\udesc\patterns\FamiliaService.class
+com\udesc\app\App.class
 com\udesc\patterns\CrudController.class
 com\udesc\patterns\FamiliaController.class
 com\udesc\common\model\Familia.class

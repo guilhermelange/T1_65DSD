@@ -9,15 +9,21 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class ClientApp {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Aplicação disponível");
+        
         while (true) {
             String command = scanner.nextLine();
             if (!command.isEmpty()) {
                 if (command.toUpperCase().equals("EXIT"))
                     break;
-                sendMessage(command);
+                
+                try {
+                    sendMessage(command);
+                } catch (Exception e) {
+                    System.out.println("Erro ao conectar: " + e.getMessage());
+                }
             }
         }
     }
