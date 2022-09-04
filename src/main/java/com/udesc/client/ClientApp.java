@@ -11,28 +11,29 @@ import java.util.Scanner;
 public class ClientApp {
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
-
+        System.out.println("Aplicação disponível");
         while (true) {
             String command = scanner.nextLine();
-            sendMessage(command);
+            if (!command.isEmpty()) {
+                if (command.toUpperCase().equals("EXIT"))
+                    break;
+                sendMessage(command);
+            }
         }
     }
 
-    private static boolean sendMessage(String command) throws IOException {
+    private static void sendMessage(String command) throws IOException {
         Socket socket = new Socket(Constants.SERVER_HOST, Constants.SERVER_PORT);
         PrintWriter out = new PrintWriter(socket.getOutputStream());
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         out.println(command);
         out.flush();
         
-        if (command.equals("exit")) {
-            return true;
-        }
-        
         String result;
         while ((result = in.readLine()) != null) {
             System.out.println(result);
         }
-        return false;
+        
+        System.out.println("");
     }
 }

@@ -7,6 +7,7 @@ import java.net.ServerSocket;
 public class ServerApp {
     public static void main(String[] args) throws IOException {
         ServerSocket serverSocket = new ServerSocket(Constants.SERVER_PORT);
+        System.out.println("Servidor ativo na porta " + Constants.SERVER_PORT);
         
         while (true) {
             ServerHandler serverHandler = new ServerHandler(serverSocket.accept());

@@ -14,7 +14,7 @@ public class PessoaService {
     public String insert(Pessoa pessoa) {
         Map<String, Pessoa> pessoas = database.getPessoas();
         pessoas.put(pessoa.getCpf(), pessoa);
-        return "";
+        return "Pessoa inserida com sucesso";
     }
     
     public String update(Pessoa pessoa) {
@@ -61,8 +61,12 @@ public class PessoaService {
     
     public String list() {
         Map<String, Pessoa> pessoas = database.getPessoas();
-        String result = String.valueOf(pessoas.size());
         
+        if (pessoas.size() <= 0) {
+            return "Sem pessoas cadastradas";
+        }
+        
+        String result = String.valueOf(pessoas.size());
         for (Map.Entry<String, Pessoa> entry : pessoas.entrySet()) {
             result += "\n" + entry.getValue().toString();
         }

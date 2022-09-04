@@ -36,6 +36,11 @@ public class Pessoa {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        return getCpf().equals(((Pessoa) obj).getCpf());
+    }
+
+    @Override
     public String toString() {
         return String.format("%s;%s;%s", getNome(), getCpf(), getEndereco());
     }

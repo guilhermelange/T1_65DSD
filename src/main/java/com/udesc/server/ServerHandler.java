@@ -16,26 +16,28 @@ public class ServerHandler extends Thread {
     
     @Override
     public void run() {
-        System.out.println("Accepted connection request from " + socket.getInetAddress().getHostAddress());
-        try (
+        System.out.println("Conexão aceita para " + socket.getInetAddress().getHostAddress());
+        try {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);                   
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        ) {
+            
             String inputLine = in.readLine();
             String result = handleCommand(inputLine);
             out.println(result);
             socket.close();
-        } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Erro interno: " + e.getMessage());
         }
     }
     
     private static String handleCommand(String inputLine) {
-        Router router = new Router(inputLine);
         try {
+            Router router = new Router(inputLine);
             return router.handleControllerOperation();
+        } catch(IndexOutOfBoundsException e) {
+            return "Parâmetros insuficientes!";
         } catch (Exception e) {
-            return "Erro ao executar comando: " + e.getMessage();
+            return "Erro: " + e.getMessage();
         }
     }
 }

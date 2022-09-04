@@ -31,4 +31,12 @@ public class PessoaController implements CrudController {
     public String list() {
         return this.pessoaService.list();
     }
+
+    public String add(List<String> params) {
+        throw new UnsupportedOperationException("Método não suportado para pessoas.");
+    }
+
+    public String remove(List<String> params) {
+        throw new UnsupportedOperationException("Método não suportado para pessoas.");
+    }
 }
