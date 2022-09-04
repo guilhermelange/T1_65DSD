@@ -1,12 +1,11 @@
 package com.udesc.server;
 
+import com.udesc.patterns.Router;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.Arrays;
-import java.util.List;
 
 public class ServerHandler extends Thread {
     private Socket socket;
@@ -32,10 +31,11 @@ public class ServerHandler extends Thread {
     }
     
     private static String handleCommand(String inputLine) {
-        String result = inputLine + " response \n quebra \n quebra2";
-        List<String> data = Arrays.asList(inputLine.split(";"));
-        
-        String operation = data.get(0);
-        return result;
+        Router router = new Router(inputLine);
+        try {
+            return router.handleControllerOperation();
+        } catch (Exception e) {
+            return "Erro ao executar comando: " + e.getMessage();
+        }
     }
 }
