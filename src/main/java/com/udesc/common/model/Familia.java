@@ -1,6 +1,5 @@
 package com.udesc.common.model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 

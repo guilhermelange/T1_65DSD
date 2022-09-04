@@ -71,7 +71,7 @@ public class FamiliaService {
         for (Map.Entry<String, Familia> entry : familias.entrySet()) {
             Familia familia = entry.getValue();
             result += (result.isEmpty()) ? "" : "\n";
-            result += familia.toString();
+            result += familia.toString() + "\n";
         }
         return result;
     }
